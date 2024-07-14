@@ -58,7 +58,7 @@ def get_retriever() -> BaseRetriever:
     vectorstore = Chroma.from_documents(
         documents=documents,
         collection_name="pandas-rag-chroma",
-        embedding=OpenAIEmbeddings(base_url="https://api.aiproxy.io"),
+        embedding=OpenAIEmbeddings(base_url="https://api.aiproxy.io/v1"),
     )
     retriever = vectorstore.as_retriever()
     return retriever
