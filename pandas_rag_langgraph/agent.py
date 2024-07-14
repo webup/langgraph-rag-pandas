@@ -13,7 +13,7 @@ from langchain_core.pydantic_v1 import BaseModel, Field
 from langchain_core.retrievers import BaseRetriever
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_anthropic import ChatAnthropic
-from langchain_openai import OpenAIEmbeddings
+from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langgraph.graph import END, StateGraph, add_messages
 
 MAX_RETRIES = 3
@@ -66,7 +66,7 @@ def get_retriever() -> BaseRetriever:
 
 # LLM / Retriever / Tools
 # llm = ChatAnthropic(model="claude-3-5-sonnet-20240620", temperature=0)
-llm = ChatAnthropic(model="claude-3-sonnet-20240229", temperature=0, base_url="https://api.aiproxy.io")
+llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0, base_url="https://api.aiproxy.io/v1")
 retriever = get_retriever()
 tavily_search_tool = TavilySearchResults(max_results=3)
 
