@@ -58,14 +58,15 @@ def get_retriever() -> BaseRetriever:
     vectorstore = Chroma.from_documents(
         documents=documents,
         collection_name="pandas-rag-chroma",
-        embedding=OpenAIEmbeddings(),
+        embedding=OpenAIEmbeddings(base_url="https://api.aiproxy.io"),
     )
     retriever = vectorstore.as_retriever()
     return retriever
 
 
 # LLM / Retriever / Tools
-llm = ChatAnthropic(model="claude-3-5-sonnet-20240620", temperature=0)
+# llm = ChatAnthropic(model="claude-3-5-sonnet-20240620", temperature=0)
+llm = ChatAnthropic(model="claude-3-sonnet-20240229", temperature=0, base_url="https://api.aiproxy.io")
 retriever = get_retriever()
 tavily_search_tool = TavilySearchResults(max_results=3)
 
